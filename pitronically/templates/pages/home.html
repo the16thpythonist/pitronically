@@ -1,1 +1,6 @@
-{% extends "base.html" %}
+{% extends "redirect.html" %}
+
+{% block head %}
+  <script>window.location = "{% url "blog:projects" %}";</script>
+{% endblock %}
+

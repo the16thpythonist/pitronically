@@ -3,6 +3,8 @@ Base settings to build other settings files upon.
 """
 
 import environ
+import os
+
 
 ROOT_DIR = (
     environ.Path(__file__) - 3
@@ -59,6 +61,9 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
+    # Django filebrowser, which is needed by the editor so images can be
+    # included into blog posts
+    "filebrowser",
     "django.contrib.admin",
 ]
 THIRD_PARTY_APPS = [
@@ -67,10 +72,18 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "rest_framework",
+    # TinyMCE Editor for blog entries
+    "ckeditor",
+    "ckeditor_uploader",
+    # A plugin for easily handeling image modifications
+    "imagekit",
+    # A plugin for tagging
+    "taggit",
 ]
 LOCAL_APPS = [
     "pitronically.users.apps.UsersAppConfig",
     # Your stuff: custom apps go here
+    "pitronically.blog.apps.BlogAppConfig"
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -231,5 +244,52 @@ ACCOUNT_ADAPTER = "pitronically.users.adapters.AccountAdapter"
 SOCIALACCOUNT_ADAPTER = "pitronically.users.adapters.SocialAccountAdapter"
 
 
-# Your stuff...
-# ------------------------------------------------------------------------------
+# ################################
+# PITRONICALLY ADDITIONAL SETTINGS
+# ################################
+
+# CKEDITOR EDITOR PLUGIN
+# ----------------------
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_RESTRICT_BY_DATE = True
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar':  'full',
+        'extraPlugins': ','.join([
+            'codesnippet',
+            'codesnippetgeshi'
+        ])
+    },
+}
+
+# FILEBROWSER APP
+# ---------------
+# This app adds a filebrowser utility to the website. This is for example needed to integrate images or other
+# media into the blog posts using the TinyMCE Editor (the tinymce app requires the filebrowser app)
+# The filebrowser app needs to have the folder and the types of files specified
+FILEBROWSER_DIRECTORY = "uploads/"
+FILEBROWSER_VERSIONS_BASEDIR = "_versions/"
+FILEBROWSER_EXTENSIONS = {
+    'Image':    ['.jpg', '.jpeg', '.gif', '.png', '.tif', '.tiff'],
+    'Document': ['.pdf', '.doc', '.rtf', '.txt', '.xls', '.csv'],
+    'Video':    ['.mov', '.wmv', '.mpeg', '.mpg', '.avi', '.rm'],
+    'Audio':    ['.mp3', '.mp4', '.wav', '.aiff', '.midi', '.m4p']
+}
+FILEBROWSER_SELECT_FORMATS = {
+    'file':     ['Image', 'Document', 'Video', 'Audio'],
+    'image':    ['Image'],
+    'document': ['Document'],
+    'media':    ['Video', 'Audio'],
+}
+FILEBROWSER_VERSION_QUALITY = 90
+FILEBROWSER_SHOW_IN_DASHBOARD = True
+
+
+# TAGGIT APP
+# ----------
+# This app provides support for simple tagging of models, so I dont have to reinvent
+# the wheel on that one
+TAGGIT_CASE_INSENSITIVE = True

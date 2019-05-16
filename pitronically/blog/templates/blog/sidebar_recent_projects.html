@@ -1,0 +1,28 @@
+<div class="sidebar-widget">
+  <div class="widget-container">
+    <div class="widget-title">
+      <h1>
+        {{ title }}
+      </h1>
+    </div>
+    <hr>
+    <div class="widget-content">
+       {% if projects %}
+          {% for project in projects %}
+            <div class="project-listing-entry">
+              <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+              {% comment %}
+              <span>
+                by <a href="{{ project.author.get_absolute_url }}" class="project-author">{{ project.author.username|upper }}</a>
+              </span>
+              {% endcomment %}
+            </div>
+          {% endfor %}
+       {% else %}
+          <div class="widget-error">
+            No recent projects available
+          </div>
+       {% endif %}
+    </div>
+  </div>
+</div>

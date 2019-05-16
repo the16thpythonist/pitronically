@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <div class="project-list-title">
+    <h1>
+      {{ title }}
+    </h1>
+  </div>
+  <hr>
+  <div class="project-list">
+    {% for project in projects %}
+      <div class="project-list-item">
+        <div class="project-list-item-container">
+          <a href="{{ project.get_absolute_url }}">
+            <img src="{{ project.thumbnail_preview.url }}" height="280px" width="280px">
+          </a>
+          <div class="project-list-item-meta">
+            <a href="{{ project.get_absolute_url }}">
+              <h1>{{ project.title }}</h1>
+              <h2>{{ project.subtitle }}</h2>
+            </a>
+            <div class="project-list-item-author">
+              by <a href="{{ project.author.get_absolute_url }}">{{ project.author.username|upper }}</a>
+            </div>
+            <div class="project-list-item-date">
+              {{ project.publishing_date.date }}
+          </div>
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
