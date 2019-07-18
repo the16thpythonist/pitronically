@@ -61,9 +61,12 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
-    # Django filebrowser, which is needed by the editor so images can be
-    # included into blog posts
-    "filebrowser",
+    # 18.07.2019
+    # So this is obviously a custom app, but I had to move it here to fix a bug.
+    # The bug is being fixed by overwriting the default "admin/change_form.html" template for
+    # the user app. This overriding is only possible though if the app is listed before the
+    # "django.contrib.admin" app
+    "pitronically.users.apps.UsersAppConfig",
     "django.contrib.admin",
 ]
 THIRD_PARTY_APPS = [
@@ -72,16 +75,19 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "rest_framework",
-    # TinyMCE Editor for blog entries
+    # Ckeditor Editor for blog entries
     "ckeditor",
     "ckeditor_uploader",
     # A plugin for easily handeling image modifications
     "imagekit",
     # A plugin for tagging
     "taggit",
+    # Filebrowser
+    "easy_thumbnails",
+    "filer",
+    "mptt",
 ]
 LOCAL_APPS = [
-    "pitronically.users.apps.UsersAppConfig",
     # Your stuff: custom apps go here
     "pitronically.blog.apps.BlogAppConfig"
 ]
@@ -265,6 +271,7 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+"""
 # FILEBROWSER APP
 # ---------------
 # This app adds a filebrowser utility to the website. This is for example needed to integrate images or other
@@ -286,7 +293,7 @@ FILEBROWSER_SELECT_FORMATS = {
 }
 FILEBROWSER_VERSION_QUALITY = 90
 FILEBROWSER_SHOW_IN_DASHBOARD = True
-
+"""
 
 # TAGGIT APP
 # ----------

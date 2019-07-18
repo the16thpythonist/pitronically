@@ -24,7 +24,20 @@ class ProjectAdminForm(ModelForm):
         self.fields['content'].widget = CKEditorUploadingWidget()
 
     class Meta:
-        fields = ["title", "subtitle", "slug", "content", "publishing_date", "creation_date", "next", "previous", "tagss", "author", "thumbnail", "thumbnail_preview"]
+        fields = [
+            "title",
+            "subtitle",
+            "slug",
+            "content",
+            "publishing_date",
+            "creation_date",
+            "next",
+            "previous",
+            "tags",
+            "author",
+            "thumbnail",
+            "thumbnail_preview"
+        ]
         model = Project
 
 

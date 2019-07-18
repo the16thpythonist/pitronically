@@ -9,8 +9,6 @@ from django.views.generic import View, RedirectView
 from django.shortcuts import render, get_object_or_404
 
 # Third party imports
-from filebrowser.sites import site
-from filebrowser.base import FileListing, FileObject
 
 # Project wide imports
 from .models import Project

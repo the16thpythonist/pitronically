@@ -14,7 +14,7 @@ from django.forms import FileInput
 # Third party imports
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
-from filebrowser.fields import FileBrowseField
+from filer.fields.image import FilerImageField
 from taggit.managers import TaggableManager
 
 # Project local imports
@@ -31,19 +31,7 @@ class Entry(models.Model):
     creation_date = DateTimeField(default=timezone.now)
     next = URLField(null=True, blank=True)
     previous = URLField(null=True, blank=True)
-    tagss = TaggableManager()
-    thumbnail = FileBrowseField("Image",
-                                max_length=200,
-                                directory="uploads",
-                                extensions=[".png", ".jpeg", ".jpg"],
-                                blank=True,
-                                null=True)
-    thumbnail_preview = FileBrowseField("Image",
-                                        max_length=200,
-                                        directory="uploads",
-                                        extensions=[".png", ".jpeg", ".jpg"],
-                                        blank=True,
-                                        null=True)
+    tags = TaggableManager()
 
     class Meta:
         abstract = True
@@ -55,7 +43,8 @@ class Entry(models.Model):
 
 
 class Project(Entry):
-    pass
+    thumbnail = FilerImageField(related_name="project_thumbnail", on_delete=models.CASCADE)
+    thumbnail_preview = FilerImageField(related_name="project_thumbnail_preview", on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse("blog:project_detail", kwargs={"pk": self.id})

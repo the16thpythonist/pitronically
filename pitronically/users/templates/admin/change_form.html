@@ -1,0 +1,12 @@
+{% extends 'admin/change_form.html' %}
+{% load static %}
+
+{# 18.07.2019 #}
+{# The block "extrahead" is part of the html head section of the admin change form document. By calling the #}
+{# block.super after including the jquery, jquery is practically included as the very first script. #}
+{# This fixes a bug with the rest of the jQuery for the user page, where jQuery seems to load after alll the #}
+{# Third party scripts which would actually need it to work. #}
+{% block extrahead %}
+  <script src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}"></script>
+  {{ block.super }}
+{% endblock %}

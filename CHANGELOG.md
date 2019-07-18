@@ -1,4 +1,4 @@
-### 0.1.0.0 - initial version - 16.05.2019
+### 0.1.0 - initial version - 16.05.2019
 
 - The most important models are implemented. This includes the main "Entry" and the 
 inheriting "Project" Model. The Project model is used to represent a blog post showcasing 
@@ -13,3 +13,14 @@ for each post.
 - The main HTML and CSS template for the site
 - Using the NavbarMixin and SidebarMixin. Every view has a reusable access to displaying 
 common elements.
+
+### 0.1.1 - 18.07.2019
+
+- Replaced the WYSIWYG Editor package with a new one called "ckeditor", because of its possiblity 
+to define custom storages for image files used within the editor. This feature will be needed to make 
+the editor work in production, when the media files are saved in AMAZON AWS buckets
+- Replaced the previous file management package with django-filer, also due to its compatibility 
+with AWS buckets.
+- Fixed the bug with no image being able to be uploaded to any user model
+- Reworked the image handling for user models: A full size profile picture can now be uploaded and the 
+50x50px profile icon is being computed during the model save process.
