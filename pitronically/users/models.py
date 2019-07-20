@@ -117,51 +117,57 @@ class User(AbstractUser):
         # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
         # of the file. The "path" property of this "File" object now finally contains the full path of the file
         # on the system
-        file_descriptor = self._get_profile_image_file()
+        image_bytes = self._get_profile_image_content()
+        print(image_bytes)
+        source_file = tempfile.TemporaryFile()
+        source_file.write(image_bytes)
 
-        with file_descriptor as file:
-            image_generator = ProfileImage(source=file)
+        image_generator = ProfileImage(source=source_file)
 
-            # The "generate" method returns a "_io.BytesIO" object, which describes the byte string for the resulting
-            # image file. But we need the actual byte string. It can be extracted from the BytesIO object using its
-            # "getvalue" method which returns a normal python byte string
-            result_bytesio = image_generator.generate()
-            result_bytes = result_bytesio.getvalue()
+        # The "generate" method returns a "_io.BytesIO" object, which describes the byte string for the resulting
+        # image file. But we need the actual byte string. It can be extracted from the BytesIO object using its
+        # "getvalue" method which returns a normal python byte string
+        result_bytesio = image_generator.generate()
+        result_bytes = result_bytesio.getvalue()
 
-            # Here we create a temporary file. We simply need it because it works the same way as a normal python file
-            # descriptor. A file descriptor is needed to save the "ImageField"
-            result_file = tempfile.TemporaryFile()
-            result_file.write(result_bytes)
+        # Here we create a temporary file. We simply need it because it works the same way as a normal python file
+        # descriptor. A file descriptor is needed to save the "ImageField"
+        result_file = tempfile.TemporaryFile()
+        result_file.write(result_bytes)
 
-            # "profile_icon_created" is a class attribute, which is initially False. The creation of the profile image
-            # will only be triggered if it is False. We need to set it to True, because the "save" method on the
-            # profile_icon "ImageField" triggers a save for the whole User for some reason, which would create an
-            # infinite recursion.
-            self.profile_icon_created = True
-            self.profile_icon.save(
-                self.name + '_profile.jpeg',
-                File(result_file)
-            )
+        # "profile_icon_created" is a class attribute, which is initially False. The creation of the profile image
+        # will only be triggered if it is False. We need to set it to True, because the "save" method on the
+        # profile_icon "ImageField" triggers a save for the whole User for some reason, which would create an
+        # infinite recursion.
+        self.profile_icon_created = True
+        self.profile_icon.save(
+            self.name + '_profile.jpeg',
+            File(result_file)
+        )
 
-    def _get_profile_image_file(self):
+        source_file.close()
+
+    def _get_profile_image_content(self):
         if settings.IS_PRODUCTION:
-            return self._get_profile_image_file_by_url()
+            return self._get_profile_image_content_by_url()
         else:
-            return self._get_profile_image_file_by_path()
+            return self._get_profile_image_content_by_path()
 
-    def _get_profile_image_file_by_path(self):
+    def _get_profile_image_content_by_path(self):
         # "self.image" is of the type "Image" from the Filer package.
         # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
         # of the file. The "path" property of this "File" object now finally contains the full path of the file
         # on the system
         path = self.image.file_ptr.path
-        return open(path, mode='rb')
+        with open(path, mode='rb') as image:
+            return image.read()
 
-    def _get_profile_image_file_by_url(self):
+    def _get_profile_image_content_by_url(self):
         # "self.image" is of the type "Image" from the Filer package.
         # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
         # of the file. The "path" property of this "File" object now finally contains the full path of the file
         # on the system
         url = self.image.file_ptr.url
         http = urllib3.PoolManager()
-        return http.request('GET', url, preload_content=False)
+        with http.request('GET', url, preload_content=False) as image:
+            return image.read()
