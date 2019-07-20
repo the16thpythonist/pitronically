@@ -1,6 +1,8 @@
 from .base import *  # noqa
 from .base import env
 
+IS_PRODUCTION = True
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key

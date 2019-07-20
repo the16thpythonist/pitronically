@@ -1,4 +1,6 @@
 import tempfile
+import urllib3
+import os
 
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, ImageField
@@ -7,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 import django.db.models as models
 
 from django.core.files import File
+from django.conf import settings
 
 # Third party imports
 from filer.fields.image import FilerImageField
@@ -114,9 +117,9 @@ class User(AbstractUser):
         # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
         # of the file. The "path" property of this "File" object now finally contains the full path of the file
         # on the system
-        path = self.image.file_ptr.path
+        file_descriptor = self._get_profile_image_file()
 
-        with open(path, mode='rb') as file:
+        with file_descriptor as file:
             image_generator = ProfileImage(source=file)
 
             # The "generate" method returns a "_io.BytesIO" object, which describes the byte string for the resulting
@@ -139,3 +142,26 @@ class User(AbstractUser):
                 self.name + '_profile.jpeg',
                 File(result_file)
             )
+
+    def _get_profile_image_file(self):
+        if settings.IS_PRODUCTION:
+            return self._get_profile_image_file_by_url()
+        else:
+            return self._get_profile_image_file_by_path()
+
+    def _get_profile_image_file_by_path(self):
+        # "self.image" is of the type "Image" from the Filer package.
+        # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
+        # of the file. The "path" property of this "File" object now finally contains the full path of the file
+        # on the system
+        path = self.image.file_ptr.path
+        return open(path, mode='rb')
+
+    def _get_profile_image_file_by_url(self):
+        # "self.image" is of the type "Image" from the Filer package.
+        # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
+        # of the file. The "path" property of this "File" object now finally contains the full path of the file
+        # on the system
+        url = self.image.file_ptr.url
+        http = urllib3.PoolManager()
+        return http.request('GET', url, preload_content=False)

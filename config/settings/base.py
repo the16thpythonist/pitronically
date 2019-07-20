@@ -300,3 +300,10 @@ FILEBROWSER_SHOW_IN_DASHBOARD = True
 # This app provides support for simple tagging of models, so I dont have to reinvent
 # the wheel on that one
 TAGGIT_CASE_INSENSITIVE = True
+
+# 20.07.2019
+# This flag indicates, whether the current settings are for the local environment or for the
+# production environment. This is a necessary difference to make, because the local environment
+# uses a media folder on the very same machine, while the production uses a separate media
+# server.
+IS_PRODUCTION = False
