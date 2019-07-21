@@ -23,7 +23,6 @@ User = get_user_model()
 # VIEW CLASSES
 # ############
 
-
 class ProjectListView(SidebarMixin, NavbarMixin, View):
 
     def get(self, request):

@@ -22,7 +22,6 @@ from pitronically.users.models import User
 
 
 class Entry(models.Model):
-    author = ForeignKey(User, on_delete=models.CASCADE, default=1)
     title = CharField(max_length=250)
     slug = SlugField(max_length=100, default='slug')
     subtitle = CharField(max_length=250, default="")
@@ -43,6 +42,7 @@ class Entry(models.Model):
 
 
 class Project(Entry):
+    author = ForeignKey(User, on_delete=models.CASCADE, default=1, related_name="projects")
     thumbnail = FilerImageField(related_name="project_thumbnail", on_delete=models.CASCADE)
     thumbnail_preview = FilerImageField(related_name="project_thumbnail_preview", on_delete=models.CASCADE)
 
@@ -51,6 +51,7 @@ class Project(Entry):
 
 
 class Tutorial(Entry):
+    author = ForeignKey(User, on_delete=models.CASCADE, default=1, related_name="tutorials")
     pass
 
 

@@ -25,9 +25,10 @@ class UserAdmin(auth_admin.UserAdmin):
 
     form = UserChangeForm
     add_form = UserCreationForm
-    fieldsets = (("User", {"fields": ("image", "name",)}),) + auth_admin.UserAdmin.fieldsets
+    # 21.07.2019
+    # Moved all the fields, which the user can use to customize the public profile to a new field set "Profile"
+    fieldsets = (
+                    ("Profile", {"fields": ("image", "name", "profession", "country", "age", "introduction")}),
+                ) + auth_admin.UserAdmin.fieldsets
     list_display = ["username", "name", "is_superuser"]
     search_fields = ["name"]
-
-    def __init__(self, *args, **kwargs):
-        super(auth_admin.UserAdmin, self).__init__(*args, **kwargs)

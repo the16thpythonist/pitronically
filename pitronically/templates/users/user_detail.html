@@ -1,34 +1,39 @@
-{% extends "core.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block title %}User: {{ object.username }}{% endblock %}
-
 {% block content %}
-<div class="container">
+  <div class="user-detail">
+    <div class="user-side">
+      <img class="user-profile-image" src="{{ user.image.url }}" height="300px" width="300px">
+      <h4>Profile Info</h4>
+      <div class="user-brief">
+        <span class="user-name">Name: {{ user.name }}</span>
+        <span class="user-country">Country: {{ user.country }}</span>
+        <span class="user-age">Age: {{ user.age }}</span>
+        <span class="user-profession">Profession: {{ user.profession }}</span>
+      </div>
+    </div>
+    <div class="user-main">
+      <h1>{{ user.username }}</h1>
+      <hr>
+      <div class="user-introduction">{{ user.introduction|safe }}</div>
+      {% if user == request.user %}
+      <!-- Action buttons -->
+      <div class="user-actions">
 
-  <div class="row">
-    <div class="col-sm-12">
-
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
+      </div>
+      <!-- End Action buttons -->
       {% endif %}
+      <hr>
+      <h2>{{ user.username }}'s Recent Projects</h2>
+      <div class="user-recent-projects">
+        {% for project in user.get_recent_projects %}
+          <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+        {% endfor %}
+      </div>
     </div>
   </div>
-
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
-
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
-  </div>
-
-</div>
-<!-- End Action buttons -->
-{% endif %}
+<div class="container">
 
 
 </div>

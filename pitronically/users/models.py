@@ -3,7 +3,7 @@ import urllib3
 import os
 
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField, ImageField
+from django.db.models import CharField, ImageField, TextField, IntegerField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 import django.db.models as models
@@ -60,8 +60,31 @@ class User(AbstractUser):
     # of the model.
     profile_icon = ImageField(null=True, blank=True)
 
+    # 21.07.2019
+    # This field should contain a short introductory text about the people, like "Hi I am mike from oregon and I just
+    # wanna write some stupid shit on this site my interests are.."
+    introduction = TextField(_("Introduce yourself"), blank=True)
+    # This will contain the age of the member
+    age = IntegerField(_("Your Age"), null=True, blank=True)
+    country = CharField(_("Your Country"), blank=True, max_length=255)
+    profession = CharField(_("Current profession"), blank=True, max_length=255)
+
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
+
+    def get_recent_projects(self, n=5):
+        """
+        Returns the n latest project posts for this user
+
+        CHANGELOG
+
+        Added 21.07.2019
+
+        :param n:
+        :return:
+        """
+        recent_projects = self.projects.order_by('publishing_date')[0:5]
+        return recent_projects
 
     def get_absolute_url(self):
         """
@@ -148,12 +171,33 @@ class User(AbstractUser):
         source_file.close()
 
     def _get_profile_image_content(self):
+        """
+        Returns a byte string, which resembles the content of the image file, which was uploaded as the profile
+        picture of the user.
+
+        CHANGELOG
+
+        Added 20.07.2019
+
+        :return:
+        """
         if settings.IS_PRODUCTION:
             return self._get_profile_image_content_by_url()
         else:
             return self._get_profile_image_content_by_path()
 
     def _get_profile_image_content_by_path(self):
+        """
+        Returns a byte string, which resembled the content of the image file, which was uploaded as the profile
+        picture of the user. It does so by getting the actual physical path of the image file from the hard drive
+        and reading this files content.
+
+        CHANGELOG
+
+        Added 20.07.2019
+
+        :return:
+        """
         # "self.image" is of the type "Image" from the Filer package.
         # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
         # of the file. The "path" property of this "File" object now finally contains the full path of the file
@@ -163,6 +207,17 @@ class User(AbstractUser):
             return image.read()
 
     def _get_profile_image_content_by_url(self):
+        """
+        Returns a byte string, which resembles the content of the image file, which was uploaded as the profile
+        picture of the user. It does so by downloading the content from the url of the image file within the media
+        folder of the website.
+
+        CHANGELOG
+
+        Added 20.07.2019
+
+        :return:
+        """
         # "self.image" is of the type "Image" from the Filer package.
         # The "file_ptr" attribute is a one to one field mapping to a Filer "File" model, which saves the location
         # of the file. The "path" property of this "File" object now finally contains the full path of the file

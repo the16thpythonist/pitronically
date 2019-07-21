@@ -22,6 +22,9 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("blog/", include("pitronically.blog.urls", namespace="blog")),
+    # 21.07.2019
+    # An impressum with the most important legal contact information
+    path("impressum/", TemplateView.as_view(template_name="pages/impressum.html"), name="impressum"),
     # CKEditor Editor for blog posts
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("filer/", include("filer.urls")),

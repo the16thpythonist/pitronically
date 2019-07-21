@@ -5,7 +5,13 @@
     <div class="header-container">
       <div class="header-logo">
         <div class="header-logo-text">
-          Pitronically
+          {# 20.07.2019 #}
+          {# The pitronically logo in the header now just links to the main page #}
+          {# I am just so used to this behaviour, that it just felt like something is missing, if the logo is #}
+          {# is not actually a link #}
+          <a href="{% url 'blog:projects' %}" class="invisible-link">
+            Pitronically
+          </a>
         </div>
       </div>
     <div class="header-navbar">
@@ -30,13 +36,14 @@
           </a>
         </div>
       {% else %}
+        {# Until the signup is actually implemented I will have to let the redirct be to the projects blog #}
         <div class="header-navbar-signin">
-          <a href="{% url 'account_login' %}" class="header-signin-button">
+          <a href="{% url 'blog:projects' %}" class="header-signin-button">
             Sign In
           </a>
         </div>
         <div class="header-navbar-signup">
-          <a href="{% url 'account_signup' %}" class="header-signup-button">
+          <a href="{% url 'blog:projects' %}" class="header-signup-button">
             Sign Up
           </a>
         </div>
@@ -85,7 +92,9 @@
       <div class="body-bottom">
         <div class="footer">
           <div class="footer-container">
-            Website is under construction!
+            <a href="{% url 'blog:projects' %}">Home</a>
+            <a href="{% url 'blog:projects' %}">Projects</a>
+            <a href="{% url 'impressum' %}">Impressum</a>
           </div>
         </div>
       </div>

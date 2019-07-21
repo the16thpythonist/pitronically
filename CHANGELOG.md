@@ -24,3 +24,15 @@ with AWS buckets.
 - Fixed the bug with no image being able to be uploaded to any user model
 - Reworked the image handling for user models: A full size profile picture can now be uploaded and the 
 50x50px profile icon is being computed during the model save process.
+
+### 0.1.2 - 21.07.2019
+
+- Added new fields to the user model, which are shown in the "Profile" section of the admin field
+ - introduction: Short text about yourself
+ - age
+ - country
+ - profession
+- Added an Impressum static page 
+- User profiles can now be viewed.
+ - My own user profile now also acts as an about me page
+- Header site logo is now a link

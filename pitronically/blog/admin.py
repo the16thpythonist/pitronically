@@ -20,7 +20,20 @@ User = get_user_model()
 class ProjectAdminForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
+        """
+        The constructor.
+
+        CHANGELOG
+
+        Added 20.05.2019
+
+        :param args:
+        :param kwargs:
+        """
         super(ProjectAdminForm, self).__init__(*args, **kwargs)
+        # the 'fields' attribute is a list which contains the Field objects for the various fields.
+        # the 'content' field is just TextField. Here we set the widget to be used to make an entry to this
+        # textfield to the CKEditor visual post editor
         self.fields['content'].widget = CKEditorUploadingWidget()
 
     class Meta:

@@ -1,16 +1,28 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView, View
+
+from django.shortcuts import get_object_or_404, render
+
+from ..blog.mixins import NavbarMixin
 
 User = get_user_model()
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+class UserDetailView(NavbarMixin, View):
 
     model = User
     slug_field = "username"
     slug_url_kwarg = "username"
+
+    def get(self, request, username):
+        user = get_object_or_404(User, username=username)
+        context = {
+            'user': user
+        }
+        context = self.context_navitems(context)
+        return render(request, 'users/user_detail.html', context)
 
 
 user_detail_view = UserDetailView.as_view()
