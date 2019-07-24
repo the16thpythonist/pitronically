@@ -460,6 +460,10 @@ div.project-list-item-container {
   flex-direction: row;
 }
 
+div.project-list-item-container img {
+  box-shadow: 3px 3px 10px #888888;
+}
+
 div.project-list-item-meta {
   flex-grow: 2;
   margin-right: 30px;
