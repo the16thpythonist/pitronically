@@ -163,7 +163,7 @@ a#header-profile-button:active {
 
 .sidebar {
   flex-grow: 1;
-  min-width: 22%;
+  min-width: 28%;
   margin-left: 4%;
   height: 1600px;
 }
@@ -260,7 +260,7 @@ div.project-title {
   flex-direction: column;
   margin-left: 20px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 div.project-title a {
@@ -287,13 +287,20 @@ div.project-author-container a {
 }
 
 div.project-title h1, div.project-list-item-meta h1 {
-  font-size: 300%;
+  font-size: 320%;
+  font-weight: bolder;
+  letter-spacing: -3px;
+  font-family: "Chivo", sans-serif;
   color: #2d2d2d;
   margin-bottom: 0px;
 }
 
 div.project-title h2, div.project-list-item-meta h2 {
-  font-size: 250%;
+  font-family: "Chivo", sans-serif;
+  font-weight: normal;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  font-size: 200%;
   color: #636363;
 }
 
@@ -374,6 +381,28 @@ div.project-content p {
   font-size: 19px;
 }
 
+/*
+24.07.2019
+The summary is a special div, that can be used in posts at the beginning.
+The section will be highlighted with a gray background
+ */
+
+div.summary {
+  padding: 20px;
+  background-color: rgba(156,156,156,0.23);
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+}
+
+div.summary p {
+  color: rgba(0,0,0,0.79);
+}
+
+div.summary h2 {
+  font-size: 180%;
+  font-family: sans-serif;
+  letter-spacing: -2px;
+}
 
 /* ************* */
 /* LIST VIEW CSS */
@@ -383,6 +412,7 @@ div.project-list-title {
   padding: 20px;
   padding-bottom: 10px;
   align-self: center;
+  font-family: "Oswald", sans-serif;
 }
 
 /*
@@ -421,8 +451,11 @@ div.project-list {
   padding: 30px;
 }
 
+div.project-list-item {
+  margin-bottom: 60px;
+}
+
 div.project-list-item-container {
-  margin-top: 30px;
   display: flex;
   flex-direction: row;
 }

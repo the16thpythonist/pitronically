@@ -16,12 +16,10 @@ from .mixins import NavbarMixin, SidebarMixin
 
 User = get_user_model()
 
-
-
-
 # ############
 # VIEW CLASSES
 # ############
+
 
 class ProjectListView(SidebarMixin, NavbarMixin, View):
 

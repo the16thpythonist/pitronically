@@ -36,3 +36,11 @@ with AWS buckets.
 - User profiles can now be viewed.
  - My own user profile now also acts as an about me page
 - Header site logo is now a link
+
+### 0.1.3 - 24.07.2019
+
+- Minor style tweaks on the project post titles and the list view template
+- Bug fix: Tags are now being displayed for each post, although they do not link to anything yet
+- Added a new special styling div class "summary", which can be added to the beginning of a post
+to write a short summary of whats to come
+- Style tweaked the ratio between the main content and the sidebar widget

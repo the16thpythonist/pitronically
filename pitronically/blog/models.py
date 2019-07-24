@@ -37,7 +37,23 @@ class Entry(models.Model):
 
     @classmethod
     def most_recent(cls, n: int):
-        projects = cls.objects.order_by("publishing_date").exclude(publishing_date__gte=timezone.now()).all()[0:n]
+        """
+        Returns a list with the n most recent projects
+
+        CHANGELOG
+
+        Added 20.05.2019
+
+        Changed 24.07.2019
+        Changed it so that the ordering is now descending
+
+        :param n:
+        :return:
+        """
+        # 24.07.2019
+        # In Django models the "order_by" by method takes the name of the class variable, which contains the field to
+        # order by. If a reverse order by this field is desired, one just needs to add a minus in front of the name:
+        projects = cls.objects.order_by("-publishing_date").exclude(publishing_date__gte=timezone.now()).all()[0:n]
         return list(projects)
 
 

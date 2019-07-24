@@ -34,3 +34,7 @@ $ docker-compose -f local.yml run --rm django sh
 ```
 
 And then a terminal from within the container will open, where stuff can be performed
+
+## TUTORIAL: Ordering a Query set of models
+
+p
