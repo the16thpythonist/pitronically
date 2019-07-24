@@ -44,3 +44,4 @@ with AWS buckets.
 - Added a new special styling div class "summary", which can be added to the beginning of a post
 to write a short summary of whats to come
 - Style tweaked the ratio between the main content and the sidebar widget
+- Turned off debug mode in production settings
