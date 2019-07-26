@@ -265,33 +265,11 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar':  'full',
         'extraPlugins': ','.join([
-        ])
+            'codesnippet'
+        ]),
+        'extraAllowedContent': 'span(*)[*]{*};i(*)[*]{*};p(*)[*]{*};div(*)[*]{*};code(*)[*]{*};ul(*)[*]{*};tr(*)[*]{*};'
     },
 }
-
-"""
-# FILEBROWSER APP
-# ---------------
-# This app adds a filebrowser utility to the website. This is for example needed to integrate images or other
-# media into the blog posts using the TinyMCE Editor (the tinymce app requires the filebrowser app)
-# The filebrowser app needs to have the folder and the types of files specified
-FILEBROWSER_DIRECTORY = "uploads/"
-FILEBROWSER_VERSIONS_BASEDIR = "_versions/"
-FILEBROWSER_EXTENSIONS = {
-    'Image':    ['.jpg', '.jpeg', '.gif', '.png', '.tif', '.tiff'],
-    'Document': ['.pdf', '.doc', '.rtf', '.txt', '.xls', '.csv'],
-    'Video':    ['.mov', '.wmv', '.mpeg', '.mpg', '.avi', '.rm'],
-    'Audio':    ['.mp3', '.mp4', '.wav', '.aiff', '.midi', '.m4p']
-}
-FILEBROWSER_SELECT_FORMATS = {
-    'file':     ['Image', 'Document', 'Video', 'Audio'],
-    'image':    ['Image'],
-    'document': ['Document'],
-    'media':    ['Video', 'Audio'],
-}
-FILEBROWSER_VERSION_QUALITY = 90
-FILEBROWSER_SHOW_IN_DASHBOARD = True
-"""
 
 # TAGGIT APP
 # ----------
