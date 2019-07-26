@@ -45,3 +45,17 @@ with AWS buckets.
 to write a short summary of whats to come
 - Style tweaked the ratio between the main content and the sidebar widget
 - Turned off debug mode in production settings
+
+### 0.1.4 - 28.07.2019
+
+- Style tweaks:
+ - Added an indicator to the thumbnail of the project list view which says "Project". This is not 
+ so relevant now, as there is nothing else but projects but it will come in handy later on, when 
+ there are more post types but one
+ - Reduced size of some fonts
+- Added a Javascript package "prism", which now allows to display syntax highlighted code 
+snippets in posts
+ - had to remove the code snippet editor from CKEditor for that
+- The list display of projects in the django admin panel now actually shows the names of the posts, 
+the author and the creation date, instead of just "Project(<index>) object"
+ 

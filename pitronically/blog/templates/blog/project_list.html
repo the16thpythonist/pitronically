@@ -12,9 +12,18 @@
     {% for project in projects %}
       <div class="project-list-item">
         <div class="project-list-item-container">
-          <a href="{{ project.get_absolute_url }}">
-            <img src="{{ project.thumbnail_preview.url }}" height="280px" width="280px">
-          </a>
+
+          <div class="project-list-item-thumbnail">
+
+            <a href="{% url 'blog:projects' %}" class="item-post-type">
+              PROJECT
+            </a>
+
+            <a href="{{ project.get_absolute_url }}">
+              <img src="{{ project.thumbnail_preview.url }}" height="280px" width="280px">
+            </a>
+          </div>
+
           <div class="project-list-item-meta">
             <a href="{{ project.get_absolute_url }}">
               <h1>{{ project.title }}</h1>

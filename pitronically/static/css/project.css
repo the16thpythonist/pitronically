@@ -219,6 +219,7 @@ div.widget-title {
 }
 
 div.widget-title h1{
+  font-size: 1.8em;
   margin-bottom: 0px;
   margin-top: 6px;
 }
@@ -302,6 +303,32 @@ div.project-title h2, div.project-list-item-meta h2 {
   letter-spacing: -2px;
   font-size: 200%;
   color: #636363;
+}
+
+div.project-list-item-thumbnail {
+  position: relative;
+}
+
+a.item-post-type {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 4px;
+  background-color: rgba(117,255,135,0.75);
+  letter-spacing: 0px;
+  color: rgba(244,244,244,0.95);
+  text-decoration: none;
+  font-family: "Oswald", sans-serif;
+  font-size: 1em;
+}
+
+a.item-post-type:hover {
+  text-decoration: none;
+  background-color: rgba(119,214,119,0.87);
 }
 
 img.project-author-image {

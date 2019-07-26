@@ -55,6 +55,12 @@ class ProjectAdminForm(ModelForm):
 
 
 class ProjectAdmin(ModelAdmin):
+
+    # 28.07.2019
+    # Up to this point the list in the admin panel would just say "Project object(3)" for example and not have
+    # any sort of information about what object was actually listed.
+    list_display = ('title', 'author', 'creation_date')
+
     form = ProjectAdminForm
 
 
