@@ -265,7 +265,8 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar':  'full',
         'extraPlugins': ','.join([
-            'codesnippet'
+            'codesnippet',
+            'eqneditor'
         ]),
         'extraAllowedContent': 'span(*)[*]{*};i(*)[*]{*};p(*)[*]{*};div(*)[*]{*};code(*)[*]{*};ul(*)[*]{*};tr(*)[*]{*};'
     },

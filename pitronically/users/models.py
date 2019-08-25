@@ -141,7 +141,6 @@ class User(AbstractUser):
         # of the file. The "path" property of this "File" object now finally contains the full path of the file
         # on the system
         image_bytes = self._get_profile_image_content()
-        print(image_bytes)
         source_file = tempfile.TemporaryFile()
         source_file.write(image_bytes)
 

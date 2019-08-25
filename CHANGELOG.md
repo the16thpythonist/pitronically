@@ -65,3 +65,5 @@ the author and the creation date, instead of just "Project(<index>) object"
  - These kind of posts are supposed to be more educational and explanatory of a certain topic instead 
  of merely being a showcase like "Project" 
  - As of for now, it uses the same styling and logic as the Project post type.
+- Added the 'eqneditor' plugin for the ckeditor, which enabled the inserting of 
+latex equations into the posts
