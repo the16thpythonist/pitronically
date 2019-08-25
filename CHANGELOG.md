@@ -67,3 +67,8 @@ the author and the creation date, instead of just "Project(<index>) object"
  - As of for now, it uses the same styling and logic as the Project post type.
 - Added the 'eqneditor' plugin for the ckeditor, which enabled the inserting of 
 latex equations into the posts
+- Added style rules so that images within a post are centered now
+- Added the "entry list view"
+ - It is now the first page visible when coming to the site
+ - It list all type of posts: tutorials as well as projects
+ - The link of the logo now also links to this page
