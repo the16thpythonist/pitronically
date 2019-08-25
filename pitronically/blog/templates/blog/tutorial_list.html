@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <div class="tutorial-list-title">
+    <h1>
+      {{ title }}
+    </h1>
+  </div>
+  <hr>
+  <div class="tutorial-list">
+    {% for tutorial in tutorials %}
+      <div class="tutorial-list-item">
+        <div class="tutorial-list-item-container">
+
+          <div class="tutorial-list-item-thumbnail">
+
+            <a href="{% url 'blog:tutorials' %}" class="item-post-type">
+              TUTORIAL
+            </a>
+
+            <a href="{{ tutorial.get_absolute_url }}">
+              <img src="{{ tutorial.thumbnail_preview.url }}" height="280px" width="280px">
+            </a>
+          </div>
+
+          <div class="tutorial-list-item-meta">
+            <a href="{{ tutorial.get_absolute_url }}">
+              <h1>{{ tutorial.title }}</h1>
+              <h2>{{ tutorial.subtitle }}</h2>
+            </a>
+            <div class="tutorial-list-item-author">
+              by <a href="{{ tutorial.author.get_absolute_url }}">{{ tutorial.author.username|upper }}</a>
+            </div>
+            <div class="tutorial-list-item-date">
+              {{ tutorial.publishing_date.date }}
+          </div>
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -256,7 +256,7 @@ div.project-listing-entry a:hover {
 /* BLOG CONTENT CSS */
 /* **************** */
 
-div.project-title {
+div.project-title, div.tutorial-title {
   display: flex;
   flex-direction: column;
   margin-left: 20px;
@@ -264,30 +264,30 @@ div.project-title {
   margin-bottom: 30px;
 }
 
-div.project-title a {
+div.project-title a, div.tutorial-title a {
   display: flex;
   flex-direction: column;
   text-decoration: none;
   font-family: "Oswald", "Lucida Grande", Verdana, Arial, sans-serif;
 }
 
-div.project-meta {
+div.project-meta, div.tutorial-meta {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
 }
 
-div.project-author-container {
+div.project-author-container, div.tutorial-author-container {
   font-size: 90%;
   margin-left: 20px;
   margin-top: 5px;
 }
 
-div.project-author-container a {
+div.project-author-container a, div.tutorial-author-container a {
   color: #636363;
 }
 
-div.project-title h1, div.project-list-item-meta h1 {
+div.project-title h1, div.project-list-item-meta h1, div.tutorial-title h1, div.tutorial-list-item-meta h1 {
   font-size: 320%;
   font-weight: bolder;
   letter-spacing: -3px;
@@ -296,7 +296,7 @@ div.project-title h1, div.project-list-item-meta h1 {
   margin-bottom: 0px;
 }
 
-div.project-title h2, div.project-list-item-meta h2 {
+div.project-title h2, div.project-list-item-meta h2, div.tutorial-title h2, div.tutorial-list-item-meta h2 {
   font-family: "Chivo", sans-serif;
   font-weight: normal;
   line-height: 1.05;
@@ -305,7 +305,7 @@ div.project-title h2, div.project-list-item-meta h2 {
   color: #636363;
 }
 
-div.project-list-item-thumbnail {
+div.project-list-item-thumbnail, div.tutorial-list-item-thumbnail {
   position: relative;
 }
 
@@ -331,7 +331,7 @@ a.item-post-type:hover {
   background-color: rgba(119,214,119,0.87);
 }
 
-img.project-author-image {
+img.project-author-image, img.tutorial-author-image {
   border-radius: 50%;
   border-style: solid;
   border-width: 3px;
@@ -339,7 +339,7 @@ img.project-author-image {
   border-color: #ffa600;
 }
 
-a.project-author {
+a.project-author, a.tutorial-author {
   color: #9b9b9b !important;
   font-family: Anton, sans-serif !important;
   font-size: 110% !important;
@@ -352,7 +352,7 @@ div.main>hr {
   margin-right: 10%;
 }
 
-div.project-tags {
+div.project-tags, div.tutorial-tags {
   margin-left: 20px;
   margin-bottom: 30px;
   margin-top: 30px;
@@ -364,12 +364,12 @@ div.project-tags {
   align-content: start;
 }
 
-div.project-tags p {
+div.project-tags p, div.tutorial-tags p {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 130%;
 }
 
-a.project-tag {
+a.project-tag, a.tutorial-tag {
   color: #5f5f5f;
   background-color: #b4ffbd;
   font-family: "Source Sans Pro", sans-serif;
@@ -381,7 +381,7 @@ a.project-tag {
   margin-left: 15px;
 }
 
-a.project-tag:hover {
+a.project-tag:hover, a.tutorial-tag:hover {
   color: #4b4b4b;
   background-color: #94d79d;
   text-decoration: none;
@@ -399,11 +399,11 @@ div.project-thumbnail::before {
 }
 */
 
-div.project-content {
+div.project-content, div.tutorial-content {
   padding: 20px;
 }
 
-div.project-content p {
+div.project-content p, div.tutorial-content p {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 19px;
 }
@@ -435,7 +435,7 @@ div.summary h2 {
 /* LIST VIEW CSS */
 /* ************* */
 
-div.project-list-title {
+div.project-list-title, div.tutorial-list-title {
   padding: 20px;
   padding-bottom: 10px;
   align-self: center;
@@ -474,24 +474,24 @@ div.main>hr:after {
 }
 */
 
-div.project-list {
+div.project-list, div.tutorial-list {
   padding: 30px;
 }
 
-div.project-list-item {
+div.project-list-item, div.tutorial-list-item {
   margin-bottom: 60px;
 }
 
-div.project-list-item-container {
+div.project-list-item-container, div.tutorial-list-item-container {
   display: flex;
   flex-direction: row;
 }
 
-div.project-list-item-container img {
+div.project-list-item-container img, div.tutorial-list-item-container img {
   box-shadow: 3px 3px 10px #888888;
 }
 
-div.project-list-item-meta {
+div.project-list-item-meta, div.tutorial-list-item-meta {
   flex-grow: 2;
   margin-right: 30px;
   margin-left: 30px;
@@ -499,11 +499,11 @@ div.project-list-item-meta {
   flex-direction: column;
 }
 
-div.project-list-item-meta a{
+div.project-list-item-meta a, div.tutorial-list-item-meta a{
   text-decoration: none;
 }
 
-div.project-list-item-date {
+div.project-list-item-date, div.tutorial-list-item-date {
   align-self: end;
   margin-top: auto;
   font-family: "Source Serif Pro", serif;
@@ -511,7 +511,7 @@ div.project-list-item-date {
   color: #9a9a9a;
 }
 
-div.project-list-item-author a {
+div.project-list-item-author a, div.tutorial-list-item-author a {
   color: #ffa600;
   font-family: "Oswald", sans-serif;
   font-size: 110%;

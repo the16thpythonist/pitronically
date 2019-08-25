@@ -18,7 +18,8 @@ from .models import Project
 class NavbarMixin:
 
     NAVITEMS = {
-        'Projects':     reverse_lazy('blog:projects')
+        'Projects':     reverse_lazy('blog:projects'),
+        'Tutorials':    reverse_lazy('blog:tutorials')
     }
 
     def context_navitems(self, context: dict):

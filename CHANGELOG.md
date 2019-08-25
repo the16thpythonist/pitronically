@@ -58,4 +58,10 @@ snippets in posts
  - had to remove the code snippet editor from CKEditor for that
 - The list display of projects in the django admin panel now actually shows the names of the posts, 
 the author and the creation date, instead of just "Project(<index>) object"
- 
+
+### 0.1.5 - 25.08.2019 
+
+- Added the "Tutorial" post type to the website
+ - These kind of posts are supposed to be more educational and explanatory of a certain topic instead 
+ of merely being a showcase like "Project" 
+ - As of for now, it uses the same styling and logic as the Project post type.

@@ -11,7 +11,7 @@ from django.shortcuts import render, get_object_or_404
 # Third party imports
 
 # Project wide imports
-from .models import Project
+from .models import Project, Tutorial
 from .mixins import NavbarMixin, SidebarMixin
 
 User = get_user_model()
@@ -53,6 +53,37 @@ class ProjectDetailView(SidebarMixin, NavbarMixin, View):
 
 
 project_detail_view = ProjectDetailView.as_view()
+
+
+class TutorialListView(SidebarMixin, NavbarMixin, View):
+
+    def get(self, request):
+        tutorials = Tutorial.most_recent(20)
+        context = {
+            'title':        'Recent Tutorials',
+            'tutorials':    tutorials,
+        }
+        context = self.context_navitems(context)
+        context = self.context_sidebar(context)
+        return render(request, 'blog/tutorial_list.html', context)
+
+
+tutorial_list_view = TutorialListView.as_view()
+
+
+class TutorialDetailView(SidebarMixin, NavbarMixin, View):
+
+    def get(self, request, pk):
+        tutorial = get_object_or_404(Tutorial, pk=pk)
+        context = {
+            'object':   tutorial
+        }
+        context = self.context_sidebar(context)
+        context = self.context_navitems(context)
+        return render(request, 'blog/tutorial_detail.html', context)
+
+
+tutorial_detail_view = TutorialDetailView.as_view()
 
 
 # ####################

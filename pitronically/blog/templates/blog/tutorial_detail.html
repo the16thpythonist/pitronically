@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <div class="tutorial-thumbnail">
+        <img class="tutorial-thumbnail" src="{{ object.thumbnail.url }}" width="100%">
+    </div>
+
+    <div class="tutorial-title">
+        <a href="">
+            <h1>
+                {{ object.title }}
+            </h1>
+            <h2>
+                {{ object.subtitle }}
+            </h2>
+        </a>
+        <div class="tutorial-meta">
+            <a href="{{ object.author.get_absolute_url }}">
+                <img src="{{ object.author.profile_icon.url }}" class="tutorial-author-image">
+            </a>
+            <div class="tutorial-author-container">
+                <a href="{{ object.author.get_absolute_url }}" class="tutorial-author">
+                    {{ object.author.username|upper }}
+                </a>
+                <a href="" class="tutorial-date">
+                    {{ object.publishing_date.date }}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="tutorial-content">
+        {{ object.content|safe }}
+    </div>
+
+    <hr>
+
+    <div class="tutorial-tags">
+        <p>
+            Tags:
+        </p>
+        {% for tag in object.tags.names %}
+            <a href="" class="tutorial-tag">
+                {{ tag }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

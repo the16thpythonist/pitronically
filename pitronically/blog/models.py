@@ -59,8 +59,8 @@ class Entry(models.Model):
 
 class Project(Entry):
     author = ForeignKey(User, on_delete=models.CASCADE, default=1, related_name="projects")
-    thumbnail = FilerImageField(related_name="project_thumbnail", on_delete=models.CASCADE)
-    thumbnail_preview = FilerImageField(related_name="project_thumbnail_preview", on_delete=models.CASCADE)
+    thumbnail = FilerImageField(related_name="project_thumbnail", on_delete=models.CASCADE, null=True)
+    thumbnail_preview = FilerImageField(related_name="project_thumbnail_preview", on_delete=models.CASCADE, null=True)
 
     def get_absolute_url(self):
         return reverse("blog:project_detail", kwargs={"pk": self.id})
@@ -68,7 +68,11 @@ class Project(Entry):
 
 class Tutorial(Entry):
     author = ForeignKey(User, on_delete=models.CASCADE, default=1, related_name="tutorials")
-    pass
+    thumbnail = FilerImageField(related_name="tutorial_thumbnail", on_delete=models.CASCADE, null=True)
+    thumbnail_preview = FilerImageField(related_name="tutorial_thumbnail_preview", on_delete=models.CASCADE, null=True)
+
+    def get_absolute_url(self):
+        return reverse("blog:tutorial_detail", kwargs={"pk": self.id})
 
 
 
