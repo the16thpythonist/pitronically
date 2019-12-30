@@ -19,7 +19,8 @@ class NavbarMixin:
 
     NAVITEMS = {
         'Projects':     reverse_lazy('blog:projects'),
-        'Tutorials':    reverse_lazy('blog:tutorials')
+        'Tutorials':    reverse_lazy('blog:tutorials'),
+        'Bets':         reverse_lazy('blog:bets')
     }
 
     def context_navitems(self, context: dict):

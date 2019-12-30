@@ -11,7 +11,9 @@ from django.forms import FileInput
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 # Project wide local imports
-from .models import Project, Tutorial
+from .models import (Project,
+                     Tutorial,
+                     Bet)
 
 
 User = get_user_model()
@@ -88,6 +90,42 @@ class TutorialAdminForm(ModelForm):
         model = Tutorial
 
 
+class BetAdminForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        """
+        The constructor.
+
+        CHANGELOG
+
+        Added 25.08.2019
+        """
+        super(BetAdminForm, self).__init__(*args, **kwargs)
+        # the 'fields' attribute is a list which contains the Field objects for the various fields.
+        # the 'content' field is just TextField. Here we set the widget to be used to make an entry to this
+        # textfield to the CKEditor visual post editor
+        self.fields['content'].widget = CKEditorUploadingWidget()
+
+    class Meta:
+        fields = [
+            "title",
+            "subtitle",
+            "slug",
+            "content",
+            "publishing_date",
+            "creation_date",
+            "next",
+            "previous",
+            "tags",
+            "author",
+            "amount",
+            "recipient",
+            "due_date",
+            "won"
+        ]
+        model = Bet
+
+
 class ProjectAdmin(ModelAdmin):
 
     # 28.07.2019
@@ -105,5 +143,13 @@ class TutorialAdmin(ModelAdmin):
     form = TutorialAdminForm
 
 
+class BetAdmin(ModelAdmin):
+
+    list_display = ('title', 'author', 'amount', 'due_date', 'won')
+
+    form = BetAdminForm
+
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Tutorial, TutorialAdmin)
+admin.site.register(Bet, BetAdmin)

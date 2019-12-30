@@ -14,7 +14,7 @@ from django.shortcuts import render, get_object_or_404
 # Third party imports
 
 # Project wide imports
-from .models import Project, Tutorial, Entry
+from .models import Project, Tutorial, Entry, Bet
 from .mixins import NavbarMixin, SidebarMixin
 
 User = get_user_model()
@@ -87,6 +87,39 @@ class TutorialDetailView(SidebarMixin, NavbarMixin, View):
 
 
 tutorial_detail_view = TutorialDetailView.as_view()
+
+
+# THE BETS
+# ########
+
+class BetListView(SidebarMixin, NavbarMixin, View):
+
+    def get(self, request):
+        bets = Bet.most_recent(20)
+        context = {
+            'title':        'Recent Bets',
+            'bets':         bets,
+        }
+        context = self.context_navitems(context)
+        context = self.context_sidebar(context)
+        return render(request, 'blog/bet_list.html', context)
+
+bet_list_view = BetListView.as_view()
+
+
+class BetDetailView(SidebarMixin, NavbarMixin, View):
+
+    def get(self, request, pk):
+        bet = get_object_or_404(Bet, pk=pk)
+        context = {
+            'object':   bet
+        }
+        context = self.context_sidebar(context)
+        context = self.context_navitems(context)
+        return render(request, 'blog/bet_detail.html', context)
+
+
+bet_detail_view = BetDetailView.as_view()
 
 
 class EntryListView(SidebarMixin, NavbarMixin, View):

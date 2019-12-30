@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <div class="bet-list-title">
+    <h1>
+      {{ title }}
+    </h1>
+  </div>
+  <hr>
+  <div class="bet-list">
+    {% for bet in bets %}
+      <div class="bet-list-item">
+        <div class="bet-list-item-container">
+          {# If the bet has been won it will always be displayed as such #}
+          {% if bet.won %}
+          <div class="bet-list-item-author">
+                <a href="{{ bet.author.get_absolute_url }}">{{ bet.author.username|upper }}</a> SUCCEEDED the bet...
+          </div>
+          {% else %}
+            {# If the bet has not been won, there are two cases: Either the bet is still ongoing, in which  #}
+            {# case we will display it normally, or it is over and not won, which means it was lost #}
+            {% if bet.is_over %}
+              <div class="bet-list-item-author">
+                <a href="{{ bet.author.get_absolute_url }}">{{ bet.author.username|upper }}</a> FAILED the bet...
+              </div>
+            {% else %}
+              <div class="bet-list-item-author">
+                <a href="{{ bet.author.get_absolute_url }}">{{ bet.author.username|upper }}</a> posed the bet...
+              </div>
+            {% endif %}
+          {% endif %}
+          <a class="invisible-link" href="{{ bet.get_absolute_url }}">
+            <h1>{{ bet.title }}</h1>
+            <h2>{{ bet.subtitle }}</h2>
+          </a>
+
+          <div class="bet-list-item-meta">
+            <div class="bet-list-item-amount">
+              {{ bet.amount }} $
+            </div>
+            <div class="bet-list-item-remaining">
+              Remaining: <em>{{ bet.get_remaining_time }}</em>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <div class="project-title">
+        <a href="">
+            <h1>
+                {{ object.title }}
+            </h1>
+            <h2>
+                {{ object.subtitle }}
+            </h2>
+        </a>
+        <div class="project-meta">
+            <a href="{{ object.author.get_absolute_url }}">
+                <img src="{{ object.author.profile_icon.url }}" class="project-author-image">
+            </a>
+            <div class="project-author-container">
+                <a href="{{ object.author.get_absolute_url }}" class="project-author">
+                    {{ object.author.username|upper }}
+                </a>
+                <a href="" class="project-date">
+                    {{ object.publishing_date.date }}
+                </a>
+            </div>
+        </div>
+        <div class="bet-info">
+          <div class="bet-info-horizontal">
+            <div class="bet-amount">
+              {{ object.amount }} $
+            </div>
+
+            <div class="bet-remaining">
+              <em>{{ object.get_remaining_time }}</em> remaining
+            </div>
+          </div>
+          <div class="bet-recipient">
+            to: {{ object.recipient }}
+          </div>
+        </div>
+    </div>
+
+    <div class="project-content">
+        {{ object.content|safe }}
+    </div>
+
+    <hr>
+
+    <div class="project-tags">
+        <p>
+            Tags:
+        </p>
+        {% for tag in object.tags.names %}
+            <a href="" class="project-tag">
+                {{ tag }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -5,7 +5,14 @@ import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import Model
-from django.db.models import SlugField, CharField, TextField, DateTimeField, URLField, ManyToManyField, ForeignKey, ImageField
+from django.db.models import (SlugField,
+                              CharField,
+                              TextField,
+                              DateTimeField,
+                              URLField,
+                              ForeignKey,
+                              IntegerField,
+                              BooleanField)
 from django.utils import timezone
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -76,3 +83,32 @@ class Tutorial(Entry):
     def get_absolute_url(self):
         return reverse("blog:tutorial_detail", kwargs={"pk": self.id})
 
+
+class Bet(Entry):
+    type = "bet"
+    author = ForeignKey(User, on_delete=models.CASCADE, default=1, related_name="bets")
+    amount = IntegerField(default=0)
+    recipient = TextField(default="charity")
+    due_date = DateTimeField(default=timezone.now)
+    won = BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse("blog:bet_detail", kwargs={"pk": self.id})
+
+    def is_over(self):
+        return self.get_remaining_seconds().seconds == 0
+
+    def get_remaining_time(self):
+        seconds = self.get_remaining_seconds().seconds
+        days, remainder = divmod(seconds, 3600 * 24)
+        hours, rest = divmod(remainder, 3600)
+        return "{:02} days {:02} hours".format(int(days), int(hours))
+
+    def get_remaining_seconds(self):
+        delta = self.due_date - timezone.now()
+        # Here we are checking if the time difference is negative. Which means, that the due date is already
+        # in the past. In such a case we dont want to display a negative time, but simply zero instead
+        if delta.seconds < 0:
+            return datetime.timedelta(seconds=0.0)
+        else:
+            return delta

@@ -72,3 +72,10 @@ latex equations into the posts
  - It is now the first page visible when coming to the site
  - It list all type of posts: tutorials as well as projects
  - The link of the logo now also links to this page
+
+### 0.1.6 - 30.12.2019
+
+- Added the "Bet" post type:
+    - This post type is supposed to represent a public bet (mostly with oneself)
+- Made style adjustments:
+    - Removed tge background pattern to make it look a lot cleaner
