@@ -96,10 +96,10 @@ class Bet(Entry):
         return reverse("blog:bet_detail", kwargs={"pk": self.id})
 
     def is_over(self):
-        return self.get_remaining_seconds().seconds == 0
+        return self.get_remaining_seconds() == 0
 
     def get_remaining_time(self):
-        seconds = self.get_remaining_seconds().seconds
+        seconds = self.get_remaining_seconds()
         days, remainder = divmod(seconds, 3600 * 24)
         hours, rest = divmod(remainder, 3600)
         return "{:02} days {:02} hours".format(int(days), int(hours))
@@ -109,6 +109,6 @@ class Bet(Entry):
         # Here we are checking if the time difference is negative. Which means, that the due date is already
         # in the past. In such a case we dont want to display a negative time, but simply zero instead
         if delta.seconds < 0:
-            return datetime.timedelta(seconds=0.0)
+            return 0
         else:
-            return delta
+            return delta.total_seconds()
